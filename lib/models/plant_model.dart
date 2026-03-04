@@ -8,6 +8,7 @@ class Plant with ChangeNotifier {
   final String imageUrl;
   final bool isAvailable;
   final String category;
+  final int stock;
 
    Plant({
     required this.id,
@@ -17,5 +18,6 @@ class Plant with ChangeNotifier {
     required this.imageUrl,
     required this.isAvailable,
     required this.category,
+    required this.stock,
   });
 }

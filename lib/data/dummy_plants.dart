@@ -10,6 +10,7 @@ final List<Plant> dummyPlants = [
     imageUrl: "${AssetsManager.imagePath}/plants/fikus.png",
     isAvailable: true,
     category: "indoor",
+    stock: 10,
   ),
   Plant(
     id: '2',
@@ -19,6 +20,7 @@ final List<Plant> dummyPlants = [
     imageUrl: "${AssetsManager.imagePath}/plants/monstera.png",
     isAvailable: true,
     category: "indoor",
+    stock: 5,
   ),
   Plant(
     id: '3',
@@ -28,6 +30,7 @@ final List<Plant> dummyPlants = [
     imageUrl: "${AssetsManager.imagePath}/plants/lavanda.png",
     isAvailable: false,
     category: "garden",
+    stock: 0,
   ),
     Plant(
     id: "4",
@@ -37,6 +40,7 @@ final List<Plant> dummyPlants = [
     imageUrl: "${AssetsManager.imagePath}/plants/kaktus.png",
     isAvailable: true,
     category: "succulents",
+    stock: 15,
   ),
    Plant(
     id: "5",
@@ -46,6 +50,7 @@ final List<Plant> dummyPlants = [
     imageUrl: "${AssetsManager.imagePath}/plants/ruza.png",
     isAvailable: true,
     category: "indoor",
+    stock: 20,
   ),
    Plant(
     id: "6",
@@ -55,5 +60,6 @@ final List<Plant> dummyPlants = [
     imageUrl: "${AssetsManager.imagePath}/plants/breza.png",
     isAvailable: true,
     category: "trees",
+    stock: 3,
   ),
 ];

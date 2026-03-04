@@ -21,7 +21,8 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
   XFile? _pickedImage;
   late TextEditingController _titleController,
       _priceController,
-      _descriptionController;
+      _descriptionController,
+      _stockController;
   String? _categoryValue;
   bool get isEditing => widget.plantModel != null;
   bool isLoading = false; // Dodato za Firebase proces
@@ -48,6 +49,9 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
     _descriptionController = TextEditingController(
       text: widget.plantModel?.description ?? "",
     );
+    _stockController = TextEditingController(
+      text: widget.plantModel?.stock.toString() ?? "",
+    );
 
     // 2. Inicijalizacija kategorije uz "osigurač"
     // Proveravamo da li kategorija iz modela uopšte postoji u našoj listi _categoriesList
@@ -72,6 +76,7 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
     _titleController.dispose();
     _priceController.dispose();
     _descriptionController.dispose();
+    _stockController.dispose();
     super.dispose();
   }
 
@@ -282,6 +287,22 @@ class _EditOrUploadProductScreenState extends State<EditOrUploadProductScreen> {
                     ),
                     const SizedBox(height: 15),
 
+                    // --- KOLIČINA NA STANJU ---
+                    TextFormField(
+                      controller: _stockController,
+                      key: const ValueKey('Stock'),
+                      keyboardType: TextInputType.number,
+                      validator: (value) =>
+                          MyValidators.uploadProdStockValidator(value),
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                        hintText: 'Količina na stanju',
+                        filled: true,
+                        prefixIcon: Icon(Icons.inventory_2_outlined),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    
                     // --- OPIS ---
                     TextFormField(
                       controller: _descriptionController,

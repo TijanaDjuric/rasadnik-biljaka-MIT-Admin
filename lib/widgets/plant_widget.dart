@@ -112,7 +112,39 @@ class PlantWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        // Ovde će ići tvoja funkcija za brisanje
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Da li ste sigurni?'),
+                            content: const Text(
+                              'Želite li da trajno izbrišete ovaj proizvod?',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(
+                                  ctx,
+                                ).pop(), // Samo zatvori dijalog
+                                child: const Text(
+                                  'Ne',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Za sada samo ispisujemo u konzolu, sutra ovde ide Firebase brisanje
+                                  Navigator.of(ctx).pop();
+                                  print(
+                                    "Proizvod će biti obrisan iz Firebase-a sutra!",
+                                  );
+                                },
+                                child: const Text(
+                                  'Da, obriši',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                       icon: const Icon(
                         Icons.delete_outline,

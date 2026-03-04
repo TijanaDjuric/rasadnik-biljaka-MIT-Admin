@@ -25,9 +25,33 @@ class MyValidators {
     if (value == null || value.trim().isEmpty) {
       return 'Unesite cenu';
     }
-    // Provera da li je unet ispravan broj (ne dopušta slova)
-    if (double.tryParse(value) == null) {
+
+    final price = double.tryParse(value);
+
+    if (price == null) {
       return 'Unesite validan broj (npr. 1200)';
+    }
+
+    if (price <= 0) {
+      return 'Cena mora biti veća od 0';
+    }
+    return null;
+  }
+
+  static String? uploadProdStockValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Unesite količinu na stanju';
+    }
+
+    // Provera da li je unet ceo broj (int), jer ne možemo imati 1.5 biljku
+    final stock = int.tryParse(value);
+
+    if (stock == null) {
+      return 'Unesite validan ceo broj';
+    }
+
+    if (stock < 0) {
+      return 'Količina ne može biti negativna';
     }
     return null;
   }
@@ -48,8 +72,9 @@ class MyValidators {
     if (value == null || value.trim().isEmpty) {
       return 'Unesite email adresu';
     }
-    if (!RegExp(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
-        .hasMatch(value)) {
+    if (!RegExp(
+      r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$',
+    ).hasMatch(value)) {
       return 'Unesite ispravnu email adresu';
     }
     return null;
