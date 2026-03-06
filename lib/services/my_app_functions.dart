@@ -9,6 +9,7 @@ class MyAppFunctions {
     required BuildContext context,
     required String subtitle,
     bool isError = true,
+    Function? fct,
   }) async {
     await showDialog(
       context: context,
@@ -29,16 +30,20 @@ class MyAppFunctions {
                 width: 60,
               ),
               const SizedBox(height: 16),
-              SubtitleTextWidget(
-                label: subtitle,
-              ),
+              SubtitleTextWidget(label: subtitle),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
+                  // 1. Prvo izvršimo funkciju (npr. clearForm) ako je prosleđena
+                  if (fct != null) {
+                    fct();
+                  }
+                  // 2. Potom zatvorimo dijalog
                   Navigator.pop(context);
                 },
                 child: const SubtitleTextWidget(
                   label: "U redu",
+                  color: Colors.red, 
                 ),
               ),
             ],
@@ -63,9 +68,7 @@ class MyAppFunctions {
             borderRadius: BorderRadius.circular(16.0),
           ),
           title: const Center(
-            child: TitleTextWidget(
-              label: "Izaberite opciju",
-            ),
+            child: TitleTextWidget(label: "Izaberite opciju"),
           ),
           content: SingleChildScrollView(
             child: ListBody(
@@ -80,7 +83,7 @@ class MyAppFunctions {
                 ),
                 TextButton.icon(
                   onPressed: () {
-                    galleryFCT(); 
+                    galleryFCT();
                     Navigator.pop(context);
                   },
                   icon: const Icon(Icons.photo_library),

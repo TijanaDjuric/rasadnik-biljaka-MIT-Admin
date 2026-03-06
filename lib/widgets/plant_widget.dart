@@ -52,13 +52,8 @@ class PlantWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Klik na karticu kod Admina vodi na izmenu proizvoda
-        Navigator.pushNamed(
-          context,
-          EditOrUploadProductScreen.routeName,
-          arguments:
-              plant, // Šaljemo ceo objekat biljke da bi se polja popunila
-        );
+        // Pozivamo onEdit funkciju koju smo prosledili iz SearchScreen-a
+        onEdit();
       },
       child: Card(
         elevation: 2,
@@ -73,11 +68,15 @@ class PlantWidget extends StatelessWidget {
               // SLIKA
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
+                child: Image.network(
+                  // PROMENJENO sa .asset na .network
                   plant.imageUrl,
                   height: size.height * 0.13,
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  // Dodaj errorBuilder da aplikacija ne pukne ako slika ne valja
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.error),
                 ),
               ),
               const SizedBox(height: 8),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Plant with ChangeNotifier {
@@ -9,6 +10,7 @@ class Plant with ChangeNotifier {
   final bool isAvailable;
   final String category;
   final int stock;
+  final Timestamp? createdAt; 
 
    Plant({
     required this.id,
@@ -19,5 +21,23 @@ class Plant with ChangeNotifier {
     required this.isAvailable,
     required this.category,
     required this.stock,
+     this.createdAt,
   });
+
+ factory Plant.fromFirestore(DocumentSnapshot doc) {
+  Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+  return Plant(
+    id: data["id"] ?? '', 
+    name: data['name'] ?? 'Nepoznata biljka',
+    // Sigurnija konverzija u double
+    price: double.parse(data['price'].toString()), 
+    category: data['category'] ?? 'Razno',
+    description: data['description'] ?? '',
+    imageUrl: data['imageUrl'] ?? '',
+    isAvailable: data['isAvailable'] ?? false,
+    // Sigurnija konverzija u int
+    stock: int.parse(data['stock'].toString()), 
+    createdAt: data['createdAt'],
+  );
+}
 }

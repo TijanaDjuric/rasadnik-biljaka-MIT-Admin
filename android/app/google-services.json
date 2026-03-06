@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "688555621344",
+    "project_id": "mit-rasadnik-biljaka",
+    "storage_bucket": "mit-rasadnik-biljaka.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688555621344:android:5413c28823b8dbd9810985",
+        "android_client_info": {
+          "package_name": "com.example.skriptarnica"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI3F5kEW2iLEzwLrE6T2-sYNWG-JTULVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688555621344:android:23b4c85f20e535f3810985",
+        "android_client_info": {
+          "package_name": "com.example.skriptarnica_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI3F5kEW2iLEzwLrE6T2-sYNWG-JTULVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

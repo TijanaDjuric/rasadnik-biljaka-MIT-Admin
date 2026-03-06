@@ -1,4 +1,4 @@
-import 'package:skriptarnica_admin/models/plant_model.dart';
+/*import 'package:skriptarnica_admin/models/plant_model.dart';
 import 'package:skriptarnica_admin/services/assets_manager.dart';
 
 final List<Plant> dummyPlants = [
@@ -63,3 +63,4 @@ final List<Plant> dummyPlants = [
     stock: 3,
   ),
 ];
+*/
