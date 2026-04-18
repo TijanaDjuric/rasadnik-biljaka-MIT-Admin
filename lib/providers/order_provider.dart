@@ -32,7 +32,7 @@ class OrderProvider with ChangeNotifier {
               // Sigurna konverzija brojeva
               totalPrice: (data['totalPrice'] as num? ?? 0.0).toDouble(),
               orderDate: data['orderDate'] ?? Timestamp.now(),
-             
+              orderStatus: data['orderStatus'] ?? 'Na čekanju',
               plants: (data['plants'] as List? ?? []).map((itemData) {
                 final item = itemData as Map<String, dynamic>;
                 return CartItem(
@@ -75,4 +75,22 @@ class OrderProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> updateOrderStatus({required String orderId, required String newStatus}) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(orderId)
+        .update({'orderStatus': newStatus});
+    
+    // Opciono ažuriraj lokalnu listu da se odmah vidi promena bez osvežavanja
+    int index = _orders.indexWhere((order) => order.orderId == orderId);
+    if (index != -1) {
+      fetchOrders(); 
+    }
+    notifyListeners();
+  } catch (e) {
+    rethrow;
+  }
+}
 }

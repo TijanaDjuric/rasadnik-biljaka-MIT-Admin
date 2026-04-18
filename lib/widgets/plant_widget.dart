@@ -8,8 +8,9 @@ import 'package:skriptarnica_admin/widgets/title_text.dart';
 class PlantWidget extends StatelessWidget {
   final Plant plant;
   final Function onEdit;
+  final Function onDelete;
 
-  const PlantWidget({super.key, required this.plant, required this.onEdit});
+  const PlantWidget({super.key, required this.plant, required this.onEdit, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class PlantWidget extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
-                  // OVDE ĆEMO DODATI FIREBASE BRISANJE
+                  onDelete();
                   Navigator.pop(context);
                 },
                 child: const Text(
@@ -103,7 +104,7 @@ class PlantWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Kanta za brisanje - Nežno crvena/roze
+                  // Kanta za brisanje - Koristi  _showDeleteDialog funkciju
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.red.withOpacity(0.1),
@@ -111,39 +112,8 @@ class PlantWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: const Text('Da li ste sigurni?'),
-                            content: const Text(
-                              'Želite li da trajno izbrišete ovaj proizvod?',
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.of(
-                                  ctx,
-                                ).pop(), // Samo zatvori dijalog
-                                child: const Text(
-                                  'Ne',
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  // Za sada samo ispisujemo u konzolu, sutra ovde ide Firebase brisanje
-                                  Navigator.of(ctx).pop();
-                                  print(
-                                    "Proizvod će biti obrisan iz Firebase-a sutra!",
-                                  );
-                                },
-                                child: const Text(
-                                  'Da, obriši',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        // Ovde pozivamo funkciju, definisala na vrhu build metode
+                        _showDeleteDialog(context);
                       },
                       icon: const Icon(
                         Icons.delete_outline,
@@ -161,13 +131,8 @@ class PlantWidget extends StatelessWidget {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                EditOrUploadProductScreen(plantModel: plant),
-                          ),
-                        );
+                        // Pozivamo onEdit funkciju prosleđenu iz SearchScreen-a
+                        onEdit();
                       },
                       icon: const Icon(
                         Icons.edit_note,

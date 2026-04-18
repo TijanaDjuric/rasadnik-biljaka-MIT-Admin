@@ -27,7 +27,7 @@ class Plant with ChangeNotifier {
  factory Plant.fromFirestore(DocumentSnapshot doc) {
   Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
   return Plant(
-    id: data["id"] ?? '', 
+    id: doc.id, 
     name: data['name'] ?? 'Nepoznata biljka',
     // Sigurnija konverzija u double
     price: double.parse(data['price'].toString()), 

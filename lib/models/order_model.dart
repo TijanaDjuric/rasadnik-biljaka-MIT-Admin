@@ -10,6 +10,7 @@ class OrderModel with ChangeNotifier {
   final double totalPrice; 
   final List<CartItem> plants; 
   final Timestamp orderDate; 
+  final String orderStatus;
 
   OrderModel({
     required this.orderId,
@@ -18,6 +19,7 @@ class OrderModel with ChangeNotifier {
     required this.totalPrice,
     required this.plants,
     required this.orderDate,
+    required this.orderStatus,
   });
 
   factory OrderModel.fromFirestore(DocumentSnapshot doc) {
@@ -52,6 +54,7 @@ class OrderModel with ChangeNotifier {
       totalPrice: (data['totalPrice'] as num? ?? 0.0).toDouble(),
       plants: tempPlants,
       orderDate: data['orderDate'] ?? Timestamp.now(),
+      orderStatus: data['orderStatus'] ?? 'Na čekanju', 
     );
   }
 }

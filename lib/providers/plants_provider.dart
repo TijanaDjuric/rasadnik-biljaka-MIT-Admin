@@ -52,7 +52,7 @@ class PlantsProvider with ChangeNotifier {
     List<Plant> searchList = passedList
         .where(
           (element) => element
-              .name // Kod tebe je name, ne productTitle
+              .name 
               .toLowerCase()
               .contains(searchText.toLowerCase()),
         )
@@ -76,5 +76,21 @@ class PlantsProvider with ChangeNotifier {
               element.category.toLowerCase() == (categoryName.toLowerCase()),
         )
         .toList();
+  }
+
+  // 7. Funkcija za brisanje proizvoda iz Firebase-a
+  Future<void> deleteProduct(String plantId) async {
+    try {
+      // Brišemo dokument iz kolekcije "plants" koristeći njegov ID
+      await productDb.doc(plantId).delete();
+      
+      // Lokalno uklanjamo iz liste da bi se UI odmah osvežio
+      _plants.removeWhere((element) => element.id == plantId);
+      
+      notifyListeners(); // Obaveštavamo aplikaciju o promeni
+    } catch (e) {
+      print("Greška pri brisanju: $e");
+      rethrow;
+    }
   }
 }

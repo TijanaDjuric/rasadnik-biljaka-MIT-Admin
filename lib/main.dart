@@ -7,6 +7,7 @@ import 'package:skriptarnica_admin/providers/plants_provider.dart';
 import 'package:skriptarnica_admin/providers/theme_provider.dart';
 import 'package:skriptarnica_admin/screens/dashboard_screen.dart';
 import 'package:skriptarnica_admin/screens/edit_upload_product_from.dart';
+import 'package:skriptarnica_admin/screens/inner_screens/order_details_screen.dart';
 import 'package:skriptarnica_admin/screens/inner_screens/orders_screen.dart';
 import 'package:skriptarnica_admin/screens/search_screen.dart';
 
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
               SearchScreen.routeName: (context) => const SearchScreen(),
               EditOrUploadProductScreen.routeName: (context) => const EditOrUploadProductScreen(),
               OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
+              OrderDetailsScreen.routeName: (context) => const OrderDetailsScreen(),
             },
           );
         },

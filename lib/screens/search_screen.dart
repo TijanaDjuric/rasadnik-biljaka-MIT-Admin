@@ -52,7 +52,6 @@ class _SearchScreenState extends State<SearchScreen> {
       }
     }
 
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -136,7 +135,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             itemBuilder: (context, index) {
                               return PlantWidget(
                                 plant: filteredPlants[index],
-                                // 1. MORA proslediti onEdit jer je označen kao 'required' u tvom PlantWidget-u
                                 onEdit: () {
                                   Navigator.push(
                                     context,
@@ -147,6 +145,29 @@ class _SearchScreenState extends State<SearchScreen> {
                                           ),
                                     ),
                                   );
+                                },
+                                onDelete: () async {
+                                  try {
+                                    // Pozivamo provider da obriše iz Firebase-a
+                                    await plantsProvider.deleteProduct(
+                                      filteredPlants[index].id,
+                                    );
+
+                                    // Obaveštenje korisniku
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            "Biljka uspešno uklonjena",
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  } catch (e) {
+                                    print("Greška pri brisanju: $e");
+                                  }
                                 },
                               );
                             },
